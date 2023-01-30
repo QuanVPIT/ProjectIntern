@@ -1,14 +1,17 @@
-import { Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { Image, StatusBar, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 const Home = () => {
   return (
     <View style={styles.container}>
-
+      <StatusBar backgroundColor={'#1545A5'} />
       <Image resizeMode='cover'
         source={require('../../images/Logo.png')}
         style={styles.imgLogo} />
-
+      <Image
+        style={styles.imgR}
+        resizeMode='cover'
+        source={require('../../images/CircleH.png')} />
       <Text style={styles.textH1}>CHÀO MỪNG BẠN ĐẾN VỚI</Text>
       <Text style={styles.textH2}>TRẠM TÁI SINH</Text>
       <Text style={styles.textH3}>CỦA AQUAFINA</Text>
@@ -17,7 +20,7 @@ const Home = () => {
       <Image resizeMode='cover'
         source={require('../../images/Model.png')}
         style={styles.imgModel} />
-      <TouchableOpacity>
+      <TouchableOpacity style={styles.buttonS}>
         <Image resizeMode='cover'
           source={require('../../images/Button.png')}
           style={styles.imgButton} />
@@ -37,13 +40,14 @@ const Home = () => {
         </View>
 
         <View style={styles.footInfor}>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.buttonInfoFB}>
             <Image resizeMode='cover'
               source={require('../../images/InfoFB.png')}
               style={styles.imgIFB} />
+              <Text style={styles.textInfoFB}>Aquafina Vietnam</Text>
           </TouchableOpacity>
           <TouchableOpacity><Text style={styles.textInWeb}>Aquafina.pepsishop.vn</Text></TouchableOpacity>
-          
+
         </View>
       </View>
 
@@ -54,14 +58,23 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
-  textInWeb:{
-    fontSize:13.5,
-    color:'white',
+  textInWeb: {
+    fontSize: 19,
+    color: '#FFFFFF',
 
   },
+  textInfoFB:{
+    color: '#FFFFFF',
+    fontSize:19,
+    marginLeft: 3
+  },
   imgIFB: {
-    height: 18,
-    width: 150
+    height: 30,
+    width: 30
+  },
+  buttonInfoFB:{
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   footInfor: {
     position: 'absolute',
@@ -71,24 +84,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#1545A5',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
     justifyContent: 'space-between',
   },
   textQR: {
     fontStyle: 'normal',
     fontWeight: '900',
-    fontSize: 10,
+    fontSize: 16,
     textAlign: 'center',
     color: '#1545A5',
-    marginTop: 3
   },
   imgQR: {
     width: '100%',
     height: '100%',
   },
   qr: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     position: 'absolute',
     right: 7,
     top: 30
@@ -96,14 +108,14 @@ const styles = StyleSheet.create({
   textF2: {
     fontStyle: 'normal',
     fontWeight: '900',
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     color: '#1545A5',
   },
   textF1: {
     fontStyle: 'normal',
     fontWeight: '400',
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     color: '#1545A5',
 
@@ -116,17 +128,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  buttonS: {
+    position: 'relative',
+    top: 465,
+    left: 195,
+  },
   imgButton: {
-    height: 150,
-    width: 150,
-    top: 300,
-    left: 130
+    height: '40%',
+    width: '30%',
   },
   imgModel: {
-    width: '100%',
-    height: 700,
     position: 'absolute',
-    top: 90
+    width: '100%',
+    height: '98%',
+
   },
   textH4: {
     fontStyle: 'normal',
@@ -159,6 +174,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#1545A5',
     marginTop: 20,
+  },
+  imgR: {
+    position: 'absolute', 
+    width: '10%', 
+    height: '10%', 
+    zIndex: 2,
+    top: 120, 
+    left: 132
   },
   imgLogo: {
     alignSelf: 'center',
