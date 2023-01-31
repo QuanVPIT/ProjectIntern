@@ -13,10 +13,11 @@ const Guide = () => {
       />
       <Text style={styles.textH}>HÃY CHO CHAI RỖNG VÀO MÁY</Text>
       
+      
       <View style={styles.content}>
         <View style={styles.vhContent}>
 
-          <TouchableOpacity style={styles.btnBack}>
+          <TouchableOpacity style={styles.btnBack} onPress={()=> console.log("123")}>
             <Text style={styles.textCL}>Xem lại hướng dẫn</Text>
           </TouchableOpacity>
 
@@ -43,7 +44,7 @@ const Guide = () => {
           resizeMode='cover'
           source={require('../../images/circle_content.png')} />
       </View>
-      <TouchableOpacity style={styles.btnS}>
+      <TouchableOpacity style={styles.btnS} >
         <Image style={styles.imgBS}
         resizeMode='cover'
         source={require('../../images/btn_finish.png')} />

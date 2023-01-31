@@ -1,4 +1,4 @@
-import { Image, StatusBar, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 const Home = () => {
