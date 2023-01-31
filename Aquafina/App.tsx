@@ -11,7 +11,7 @@ import Guide from './src/components/Guide';
 import Home from './src/components/Home';
 function App(): JSX.Element {
   return (
-    <Home />
+    <Guide />
   );
 }
 export default App; 
