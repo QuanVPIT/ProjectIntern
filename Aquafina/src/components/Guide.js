@@ -14,6 +14,7 @@ const Guide = () => {
       
       <View style={styles.content}>
         <View style={styles.vhContent}>
+
           <TouchableOpacity style={styles.btnBack}>
             <Image style={styles.icBack}
               resizeMode='cover'
@@ -72,11 +73,14 @@ const Guide = () => {
           </View>
           <Text style={styles.textF}>Nhấn <Text style={{ color: 'blue' }}>“XÁC NHẬN”</Text> khi bạn đã đọc và hiểu cách thức tham gia</Text>
         </View>
+        <Image style={styles.imgC}
+          resizeMode='cover'
+          source={require('../../images/circle_content.png')} />
       </View>
       <TouchableOpacity style={styles.btnS}>
         <Image style={styles.imgBS}
         resizeMode='cover'
-        source={require('../../images/btn_start.png')} />
+        source={require('../../images/btn_accept.png')} />
       </TouchableOpacity>
     </View>
   )
@@ -95,6 +99,13 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       marginTop:10
   },
+  imgC:{
+    position:'absolute',
+    width:'100%',
+    height:'100%',
+    top:10
+
+  },
   textF: {
     alignSelf: 'center',
     color: '#707172',
@@ -104,6 +115,7 @@ const styles = StyleSheet.create({
     width: '70%',
     height: '20%',
     marginHorizontal: 50,
+    marginTop:30
 
   },
   textI2: {
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
   vItemR: {
     width: '70%',
     height: '100%',
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 10
   },
   img1: {
@@ -133,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#CCDAF1',
     borderWidth: 3,
-    height: '40%',
+    height: '32%',
     marginBottom: 10,
     justifyContent: 'center',
   },
@@ -175,7 +187,7 @@ const styles = StyleSheet.create({
   },
   btnBack: {
     width: '10%',
-    height: '40%',
+    height: '45%',
   },
   vhContent: {
     flexDirection: 'row',
@@ -185,13 +197,13 @@ const styles = StyleSheet.create({
     height: '15%'
   },
   content: {
-    marginHorizontal: 10,
-    width: '90%',
-    height: '70%',
+    marginHorizontal: 2,
+    width: '95%',
+    height: '65%',
     backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     alignSelf: 'center',
-    marginTop: 15,
+    marginTop: 20,
     borderRadius: 20,
     paddingHorizontal: 10
   },
