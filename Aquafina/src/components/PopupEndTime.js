@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
-import React,{useState} from 'react'
+import { StyleSheet, Text, View,Image,TouchableOpacity, ImageBackground, ImageBackgroundComponent } from 'react-native'
+import React,{useState,useEffect} from 'react'
 
 const PopupEndTime = () => {
     const [timeCD, setTimeCD] = useState(10)
+    useEffect(() => {
+        setTimeout(() => {
+          setTimeCD((timeCD) => timeCD - 1);
+        }, 1000);
+      },[])
     return (
         <View style={styles.container}>
+            <Image source={require('../../images/circle_content.png')}
+            resizeMode='cover'
+            style={styles.circleBG} />
             <View style={styles.textHC}>
                 <View>
                     <Text style={styles.text1}>TRẠM</Text>
@@ -21,8 +29,18 @@ const PopupEndTime = () => {
             <Text style={styles.textWarning}>Trở về màn hình chính sau: <Text style={{color:'red'}}>{timeCD} GIÂY NỮA</Text></Text>
 
             <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.btnWarning}><Text>MÀN HÌNH CHÍNH</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btnWarning}><Text>THÊM THỜI GIAN</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnWarning}>
+                    <Text style={styles.textButton}>MÀN HÌNH CHÍNH</Text>
+                    <Image style={styles.imgBtnW}
+                        source={require('../../images/buttonW1.png')} 
+                        resizeMode='cover'/>
+                    </TouchableOpacity>
+                <TouchableOpacity style={styles.btnWarning}>
+                    <Text style={[styles.textButton,{color:'#FFFFFF'}]}>THÊM THỜI GIAN</Text>
+                    <Image style={styles.imgBtnW}
+                        source={require('../../images/buttonW2.png')} 
+                        resizeMode='cover'/>
+                    </TouchableOpacity>
             </View>
         </View>
     )
@@ -31,13 +49,28 @@ const PopupEndTime = () => {
 export default PopupEndTime
 
 const styles = StyleSheet.create({
+    imgBtnW:{
+        position:'absolute',
+        width:'100%',
+        height:'100%',
+        zIndex:-1,
+        borderRadius:10
+    },
+    textButton:{
+        fontSize:20,
+        fontWeight:'700',
+        color:'#336CC8',
+        textAlign:'center',
+
+    },
     btnWarning:{
         marginHorizontal:10,
-        width:200,
-        height:30,
+        width:220,
+        height:70,
         backgroundColor:'#EDF5F8',
         justifyContent:'center',
         alignItems:'center',
+        borderRadius:10,
     },
     viewButton:{
         flexDirection:'row',
@@ -83,10 +116,19 @@ const styles = StyleSheet.create({
       textHC: {
         alignItems: 'center'
       },
+      circleBG:{
+        position: 'absolute',
+        width:'100%',
+        height:'100%',
+      },
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor:'#FFFFFF',
+        alignSelf:'center',
+        marginTop:'28%',
+        height:'65%',
+        marginHorizontal:10,
+        borderRadius:10
     },
 })

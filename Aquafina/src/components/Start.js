@@ -1,24 +1,24 @@
-import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity,Modal } from 'react-native'
 import React, { useState,useEffect } from 'react'
-import { Modal } from 'react-native/Libraries/Modal/Modal';
 import PopupEndTime from './PopupEndTime';
 
 const Start = () => {
   const [timeCD, setTimeCD] = useState(30);
   const [showPopup, setShowPopup] = useState(false)
 
-  const changeStatus = (bool) => {
+  const changeShowPopup = (bool) => {
     setShowPopup(bool)
   }
+  
   useEffect(() => {
     setTimeout(() => {
       setTimeCD((timeCD) => timeCD - 1);
     }, 1000);
-  })
+  },[])
   
   return (
     <View style={styles.container}>
-
+      
       <StatusBar backgroundColor={'#1545A5'} />
       <Image style={styles.imgH}
         resizeMode='cover'
@@ -58,12 +58,14 @@ const Start = () => {
           resizeMode='cover'
           source={require('../../images/btn_finish.png')} />
       </TouchableOpacity>
-      {/* <Modal transparent={true}
-      animationType='fade'
-      visible={showPopup}
-      nRequestClose={() => changeStatus(false)} >
-        <PopupEndTime />
-      </Modal> */}
+
+      <Modal transparent={true}
+        animationType='fade'
+        visible={true}
+        onRequestClose ={() => changeShowPopup(false)}
+        style={styles.modalPopup}>
+          <PopupEndTime />
+      </Modal>
     </View>
   )
 }
@@ -71,6 +73,11 @@ const Start = () => {
 export default Start
 
 const styles = StyleSheet.create({
+  modalPopup:{
+    width: '100%',
+    height: '500%',
+    alignSelf:'center',
+  },
   textC2: {
     width: '80%',
     alignSelf: 'center',
