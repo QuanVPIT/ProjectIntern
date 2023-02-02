@@ -1,7 +1,10 @@
 import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Guide = () => {
+const Guide = ({navigation}) => {
+  const goToStart = () => {
+      navigation.navigate('Start')
+  }
   return (
     <View style={styles.container}>
 
@@ -77,7 +80,7 @@ const Guide = () => {
           resizeMode='cover'
           source={require('../../images/circle_content.png')} />
       </View>
-      <TouchableOpacity style={styles.btnS}>
+      <TouchableOpacity style={styles.btnS} onPress={() => goToStart()}>
         <Image style={styles.imgBS}
         resizeMode='cover'
         source={require('../../images/btn_accept.png')} />

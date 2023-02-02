@@ -1,8 +1,21 @@
 import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+import { Modal } from 'react-native/Libraries/Modal/Modal';
+import PopupEndTime from './PopupEndTime';
 
-const Guide = () => {
+const Start = () => {
   const [timeCD, setTimeCD] = useState(30);
+  const [showPopup, setShowPopup] = useState(false)
+
+  const changeStatus = (bool) => {
+    setShowPopup(bool)
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeCD((timeCD) => timeCD - 1);
+    }, 1000);
+  })
+  
   return (
     <View style={styles.container}>
 
@@ -12,89 +25,91 @@ const Guide = () => {
         source={require('../../images/logo.png')}
       />
       <Text style={styles.textH}>HÃY CHO CHAI RỖNG VÀO MÁY</Text>
-      
-      
-      <View style={styles.content}>
-        <View style={styles.vhContent}>
 
-          <TouchableOpacity style={styles.btnBack} onPress={()=> console.log("123")}>
+
+      <View style={styles.content}>
+
+        <View style={styles.vhContent}>
+          <TouchableOpacity style={styles.btnBack} onPress={() => console.log("123")}>
             <Text style={styles.textCL}>Xem lại hướng dẫn</Text>
           </TouchableOpacity>
-
           <View style={styles.textHC}>
-
-            <View>
-              <Text style={styles.text1}>TRẠM</Text>
-              <Image style={styles.imgT}
-                resizeMode='cover'
-                source={require('../../images/circle_t.png')} />
-            </View>
-
+            <Text style={styles.text1}>TRẠM</Text>
             <Text style={styles.text2}>TÁI SINH</Text>
             <Text style={styles.text3}>CỦA AQUAFINA</Text>
+            <Image style={styles.imgT}
+              resizeMode='cover'
+              source={require('../../images/circle_t.png')} />
           </View>
         </View>
+        
         <Image style={styles.imgContent}
           resizeMode='cover'
           source={require('../../images/ic_1.png')} />
-        
+
         <Text style={styles.textC1}>Lần lượt bỏ từng chai nhựa rỗng vào ô bên trái</Text>
-        <Text style={styles.textC2}>Tự động kết thúc sau: <Text style={{color:'red'}}>{timeCD} GIÂY NỮA</Text></Text>
+        <Text style={styles.textC2}>Tự động kết thúc sau: <Text style={{ color: 'red' }}>{timeCD} GIÂY NỮA</Text></Text>
         <Image style={styles.imgC}
           resizeMode='cover'
           source={require('../../images/circle_content.png')} />
       </View>
       <TouchableOpacity style={styles.btnS} >
         <Image style={styles.imgBS}
-        resizeMode='cover'
-        source={require('../../images/btn_finish.png')} />
+          resizeMode='cover'
+          source={require('../../images/btn_finish.png')} />
       </TouchableOpacity>
+      {/* <Modal transparent={true}
+      animationType='fade'
+      visible={showPopup}
+      nRequestClose={() => changeStatus(false)} >
+        <PopupEndTime />
+      </Modal> */}
     </View>
   )
 }
 
-export default Guide
+export default Start
 
 const styles = StyleSheet.create({
-  textC2:{
+  textC2: {
     width: '80%',
     alignSelf: 'center',
-    textAlign:'center',
-    fontSize:20,
-    marginTop:10,
-    fontWeight:'500',
-    color:'#707172'
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 10,
+    fontWeight: '500',
+    color: '#707172'
   },
-  textC1:{
+  textC1: {
     width: '80%',
     alignSelf: 'center',
-    textAlign:'center',
-    fontSize:25,
-    marginTop:10,
-    fontWeight:'500',
-    color:'#707172'
+    textAlign: 'center',
+    fontSize: 25,
+    marginTop: 10,
+    fontWeight: '500',
+    color: '#707172'
   },
-  imgContent:{
-    alignSelf:'center',
-    width:'90%',
-    height:'50%',
-    marginTop:50
+  imgContent: {
+    alignSelf: 'center',
+    width: '90%',
+    height: '50%',
+    marginTop: 50
   },
-  imgBS:{
-    width:'100%',
-    height:'100%',
+  imgBS: {
+    width: '100%',
+    height: '100%',
   },
-  btnS:{
-      width:'25%',
-      height:'13%',
-      alignSelf:'center',
-      marginTop:10
+  btnS: {
+    width: '25%',
+    height: '13%',
+    alignSelf: 'center',
+    marginTop: 10
   },
-  imgC:{
-    position:'absolute',
-    width:'100%',
-    height:'100%',
-    top:10
+  imgC: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: 10
 
   },
   vbContent: {
@@ -117,8 +132,8 @@ const styles = StyleSheet.create({
     width: '20%',
     height: '80%',
     position: 'absolute',
-    top: 5,
-    left: 10
+    top: -18,
+    left: 24,
   },
   text1: {
     color: '#1545A5',
@@ -133,9 +148,9 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 25,
     color: '#0047BA',
-    fontWeight:'700',
+    fontWeight: '700',
     textDecorationLine: 'underline',
-    
+
   },
   vhContent: {
     flexDirection: 'row',

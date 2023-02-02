@@ -1,7 +1,10 @@
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const goToGuide = () =>{
+    navigation.navigate('Guide');
+  }
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#1545A5'} />
@@ -20,7 +23,7 @@ const Home = () => {
       <Image resizeMode='cover'
         source={require('../../images/model.png')}
         style={styles.imgModel} />
-      <TouchableOpacity style={styles.buttonS}>
+      <TouchableOpacity style={styles.buttonS} onPress={()=> goToGuide()}>
         <Image resizeMode='cover'
           source={require('../../images/btn_start.png')}
           style={styles.imgButton} />
