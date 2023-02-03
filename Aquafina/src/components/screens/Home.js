@@ -9,23 +9,23 @@ const Home = ({navigation}) => {
     <View style={styles.container}>
       <StatusBar backgroundColor={'#1545A5'} />
       <Image resizeMode='cover'
-        source={require('../../images/logo.png')}
+        source={require('../../../images/logo.png')}
         style={styles.imgLogo} />
       <Image
         style={styles.imgR}
         resizeMode='cover'
-        source={require('../../images/circle_t.png')} />
+        source={require('../../../images/circle_t.png')} />
       <Text style={styles.textH1}>CHÀO MỪNG BẠN ĐẾN VỚI</Text>
       <Text style={styles.textH2}>TRẠM TÁI SINH</Text>
       <Text style={styles.textH3}>CỦA AQUAFINA</Text>
       <Text style={styles.textH4}>NƠI TÁI SINH VÒNG ĐỜI MỚI CHO CHAI NHỰA</Text>
 
       <Image resizeMode='cover'
-        source={require('../../images/model.png')}
+        source={require('../../../images/model.png')}
         style={styles.imgModel} />
       <TouchableOpacity style={styles.buttonS} onPress={()=> goToGuide()}>
         <Image resizeMode='cover'
-          source={require('../../images/btn_start.png')}
+          source={require('../../../images/btn_start.png')}
           style={styles.imgButton} />
       </TouchableOpacity>
 
@@ -36,7 +36,7 @@ const Home = ({navigation}) => {
 
         <View style={styles.qr}>
           <Image resizeMode='cover'
-            source={require('../../images/qr.png')}
+            source={require('../../../images/qr.png')}
             style={styles.imgQR} />
 
           <TouchableOpacity><Text style={styles.textQR}>Xem thêm</Text></TouchableOpacity>
@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
         <View style={styles.footInfor}>
           <TouchableOpacity style={styles.buttonInfoFB}>
             <Image resizeMode='cover'
-              source={require('../../images/info_fb.png')}
+              source={require('../../../images/info_fb.png')}
               style={styles.imgIFB} />
               <Text style={styles.textInfoFB}>Aquafina Vietnam</Text>
           </TouchableOpacity>

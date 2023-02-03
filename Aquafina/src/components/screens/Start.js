@@ -2,19 +2,27 @@ import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity,Modal } from
 import React, { useState,useEffect } from 'react'
 import PopupEndTime from './PopupEndTime';
 
-const Start = () => {
-  const [timeCD, setTimeCD] = useState(30);
+const Start = ({navigation}) => {
+  const [timeCD, setTimeCD] = useState(5);
   const [showPopup, setShowPopup] = useState(false)
 
   const changeShowPopup = (bool) => {
     setShowPopup(bool)
   }
   
+  const showModal = () =>{
+    if(timeCD > 0){
+      setTimeCD((timeCD) => timeCD - 1);
+    }else{
+      setShowPopup(true);
+      clearTimeout();
+    }
+  }
   useEffect(() => {
     setTimeout(() => {
-      setTimeCD((timeCD) => timeCD - 1);
+      showModal();
     }, 1000);
-  },[])
+  })
   
   return (
     <View style={styles.container}>
@@ -22,7 +30,7 @@ const Start = () => {
       <StatusBar backgroundColor={'#1545A5'} />
       <Image style={styles.imgH}
         resizeMode='cover'
-        source={require('../../images/logo.png')}
+        source={require('../../../images/logo.png')}
       />
       <Text style={styles.textH}>HÃY CHO CHAI RỖNG VÀO MÁY</Text>
 
@@ -39,32 +47,32 @@ const Start = () => {
             <Text style={styles.text3}>CỦA AQUAFINA</Text>
             <Image style={styles.imgT}
               resizeMode='cover'
-              source={require('../../images/circle_t.png')} />
+              source={require('../../../images/circle_t.png')} />
           </View>
         </View>
         
         <Image style={styles.imgContent}
           resizeMode='cover'
-          source={require('../../images/ic_1.png')} />
+          source={require('../../../images/ic_1.png')} />
 
         <Text style={styles.textC1}>Lần lượt bỏ từng chai nhựa rỗng vào ô bên trái</Text>
         <Text style={styles.textC2}>Tự động kết thúc sau: <Text style={{ color: 'red' }}>{timeCD} GIÂY NỮA</Text></Text>
         <Image style={styles.imgC}
           resizeMode='cover'
-          source={require('../../images/circle_content.png')} />
+          source={require('../../../images/circle_content.png')} />
       </View>
       <TouchableOpacity style={styles.btnS} >
         <Image style={styles.imgBS}
           resizeMode='cover'
-          source={require('../../images/btn_finish.png')} />
+          source={require('../../../images/btn_finish.png')} />
       </TouchableOpacity>
 
       <Modal transparent={true}
         animationType='fade'
-        visible={true}
+        visible={showPopup}
         onRequestClose ={() => changeShowPopup(false)}
         style={styles.modalPopup}>
-          <PopupEndTime />
+          <PopupEndTime changeShowPopup={changeShowPopup}/>
       </Modal>
     </View>
   )

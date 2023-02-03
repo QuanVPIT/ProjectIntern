@@ -2,10 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './Home';
-import Guide from './Guide';
-import Start from './Start';
-import PopupEndTime from './PopupEndTime';
+import Guide from '../screens/Guide';
+import Home from '../screens/Home';
+import Start from '../screens/Start';
+import Loading from '../screens/Loading';
 const Stack = createNativeStackNavigator();
 const ScreenNavigation = () => {
     return (
@@ -16,6 +16,7 @@ const ScreenNavigation = () => {
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Guide" component={Guide} />
                 <Stack.Screen name="Start" component={Start} />
+                <Stack.Screen name="Loading" component={Loading} />
             </Stack.Navigator>
         </NavigationContainer>
     )

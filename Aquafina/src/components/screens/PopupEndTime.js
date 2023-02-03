@@ -1,16 +1,26 @@
 import { StyleSheet, Text, View,Image,TouchableOpacity, ImageBackground, ImageBackgroundComponent } from 'react-native'
 import React,{useState,useEffect} from 'react'
 
-const PopupEndTime = () => {
+const PopupEndTime = (props) => {
     const [timeCD, setTimeCD] = useState(10)
+    const goBack = (bool) =>{
+        props.changeShowPopup(bool);
+    }
+    const timeCountDown = () => {
+        if(timeCD > 0 ){
+            setTimeCD((timeCD) => timeCD - 1);
+        }else{
+            clearTimeout();
+        }
+    }
     useEffect(() => {
         setTimeout(() => {
-          setTimeCD((timeCD) => timeCD - 1);
+            timeCountDown();
         }, 1000);
-      },[])
+      })
     return (
         <View style={styles.container}>
-            <Image source={require('../../images/circle_content.png')}
+            <Image source={require('../../../images/circle_content.png')}
             resizeMode='cover'
             style={styles.circleBG} />
             <View style={styles.textHC}>
@@ -18,7 +28,7 @@ const PopupEndTime = () => {
                     <Text style={styles.text1}>TRẠM</Text>
                     <Image style={styles.imgT}
                         resizeMode='cover'
-                        source={require('../../images/circle_t.png')} />
+                        source={require('../../../images/circle_t.png')} />
                 </View>
                 <Text style={styles.text2}>TÁI SINH</Text>
                 <Text style={styles.text3}>CỦA AQUAFINA</Text>
@@ -29,16 +39,16 @@ const PopupEndTime = () => {
             <Text style={styles.textWarning}>Trở về màn hình chính sau: <Text style={{color:'red'}}>{timeCD} GIÂY NỮA</Text></Text>
 
             <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.btnWarning}>
+                <TouchableOpacity style={styles.btnWarning} onPress={()=>goBack(false)}>
                     <Text style={styles.textButton}>MÀN HÌNH CHÍNH</Text>
                     <Image style={styles.imgBtnW}
-                        source={require('../../images/buttonW1.png')} 
+                        source={require('../../../images/buttonW1.png')} 
                         resizeMode='cover'/>
                     </TouchableOpacity>
-                <TouchableOpacity style={styles.btnWarning}>
+                <TouchableOpacity style={styles.btnWarning} onPress={ ()=>goBack(true)} >
                     <Text style={[styles.textButton,{color:'#FFFFFF'}]}>THÊM THỜI GIAN</Text>
                     <Image style={styles.imgBtnW}
-                        source={require('../../images/buttonW2.png')} 
+                        source={require('../../../images/buttonW2.png')} 
                         resizeMode='cover'/>
                     </TouchableOpacity>
             </View>
