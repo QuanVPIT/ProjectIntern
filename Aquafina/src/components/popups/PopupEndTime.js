@@ -3,9 +3,17 @@ import React,{useState,useEffect} from 'react'
 
 const PopupEndTime = (props) => {
     const [timeCD, setTimeCD] = useState(10)
-    const goBack = (bool) =>{
+    const handleHome = (bool) =>{
         props.changeShowPopup(bool);
+        props.changeGoToLoading(!bool)
     }
+
+    const handleBonusTime = (bool,number) =>{
+            props.changeShowPopup(bool);
+            props.setTimeCountDown(number);
+    }
+
+
     const timeCountDown = () => {
         if(timeCD > 0 ){
             setTimeCD((timeCD) => timeCD - 1);
@@ -39,13 +47,13 @@ const PopupEndTime = (props) => {
             <Text style={styles.textWarning}>Trở về màn hình chính sau: <Text style={{color:'red'}}>{timeCD} GIÂY NỮA</Text></Text>
 
             <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.btnWarning} onPress={()=>goBack(false)}>
+                <TouchableOpacity style={styles.btnWarning} onPress={()=>handleHome(false)}>
                     <Text style={styles.textButton}>MÀN HÌNH CHÍNH</Text>
                     <Image style={styles.imgBtnW}
                         source={require('../../../images/buttonW1.png')} 
                         resizeMode='cover'/>
                     </TouchableOpacity>
-                <TouchableOpacity style={styles.btnWarning} onPress={ ()=>goBack(true)} >
+                <TouchableOpacity style={styles.btnWarning} onPress={ ()=>handleBonusTime(false,30)} >
                     <Text style={[styles.textButton,{color:'#FFFFFF'}]}>THÊM THỜI GIAN</Text>
                     <Image style={styles.imgBtnW}
                         source={require('../../../images/buttonW2.png')} 
@@ -137,8 +145,9 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',
         alignSelf:'center',
         marginTop:'28%',
-        height:'65%',
+        height:'66%',
         marginHorizontal:10,
-        borderRadius:10
+        borderRadius:10,
+        borderWidth:1,
     },
 })

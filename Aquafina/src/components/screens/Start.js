@@ -1,22 +1,35 @@
 import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity,Modal } from 'react-native'
 import React, { useState,useEffect } from 'react'
-import PopupEndTime from './PopupEndTime';
+import PopupEndTime from '../popups/PopupEndTime';
 
 const Start = ({navigation}) => {
   const [timeCD, setTimeCD] = useState(5);
-  const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(false);
+  const [goToLoading, setGoToLoading] = useState(false)
 
   const changeShowPopup = (bool) => {
     setShowPopup(bool)
   }
   
+  const changeGoToLoading = (bool) => {
+    setGoToLoading(bool);
+  }
+  const setTimeCountDown = (number) => {
+        setTimeCD(number);
+  }
   const showModal = () =>{
-    if(timeCD > 0){
-      setTimeCD((timeCD) => timeCD - 1);
+    if(goToLoading){
+      navigation.navigate('Loading');
     }else{
-      setShowPopup(true);
-      clearTimeout();
+      if(timeCD > 0){
+        setTimeCD((timeCD) => timeCD - 1);
+      }else{
+        setShowPopup(true);
+        clearTimeout();
+      }
     }
+
+    
   }
   useEffect(() => {
     setTimeout(() => {
@@ -72,7 +85,9 @@ const Start = ({navigation}) => {
         visible={showPopup}
         onRequestClose ={() => changeShowPopup(false)}
         style={styles.modalPopup}>
-          <PopupEndTime changeShowPopup={changeShowPopup}/>
+          <PopupEndTime changeShowPopup={changeShowPopup}
+          setTimeCountDown={setTimeCountDown}
+          changeGoToLoading={changeGoToLoading}/>
       </Modal>
     </View>
   )

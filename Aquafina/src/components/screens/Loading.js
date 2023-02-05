@@ -1,6 +1,6 @@
-import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable,Modal } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
+import PopupAccumulatePoints from '../popups/PopupAccumulatePoints'
 const Loading = ({ navigation }) => {
   const [timeCD, setTimeCD] = useState(30)
   
@@ -93,11 +93,11 @@ const Loading = ({ navigation }) => {
       </View>
       
         {timeCD > 0 && 
-        <TouchableOpacity style={styles.btnS} activeOpacity='false'>
+        <Pressable style={styles.btnS}>
         <Image style={styles.imgBS}
           resizeMode='cover'
           source={require('../../../images/button_complete_hide.png')} />
-          </TouchableOpacity>
+          </Pressable>
         }
         {timeCD === 0 && 
         <TouchableOpacity style={styles.btnS}>
