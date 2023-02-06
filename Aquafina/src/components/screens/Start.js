@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 import PopupEndTime from '../popups/PopupEndTime';
 
 const Start = ({navigation}) => {
-  const [timeCD, setTimeCD] = useState(5);
+  const [timeCD, setTimeCD] = useState(30);
   const [showPopup, setShowPopup] = useState(false);
   const [goToLoading, setGoToLoading] = useState(false)
 
@@ -81,7 +81,7 @@ const Start = ({navigation}) => {
       </TouchableOpacity>
 
       <Modal transparent={true}
-        animationType='fade'
+        animationType='slide'
         visible={showPopup}
         onRequestClose ={() => changeShowPopup(false)}
         style={styles.modalPopup}>

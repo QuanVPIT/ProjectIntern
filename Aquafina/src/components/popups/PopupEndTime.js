@@ -18,6 +18,7 @@ const PopupEndTime = (props) => {
         if(timeCD > 0 ){
             setTimeCD((timeCD) => timeCD - 1);
         }else{
+            // handleHome(false);
             clearTimeout();
         }
     }

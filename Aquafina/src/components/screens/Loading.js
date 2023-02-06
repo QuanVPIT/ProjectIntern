@@ -1,4 +1,4 @@
-import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable,Modal } from 'react-native'
+import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable,Modal,ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints'
 const Loading = ({ navigation }) => {
@@ -47,8 +47,13 @@ const Loading = ({ navigation }) => {
             <Text style={styles.text3}>CỦA AQUAFINA</Text>
           </View>
         </View>
-
-        <View style={styles.viewBoxPoint}>
+        {timeCD > 0 && 
+            <View style={styles.viewBoxPoint}> 
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        }
+        {timeCD === 0 &&
+          <View style={styles.viewBoxPoint}>
           <Image style={styles.imgCircleOut}
             resizeMode='cover'
             source={require('../../../images/circle_out.png')} />
@@ -58,32 +63,40 @@ const Loading = ({ navigation }) => {
           <Text style={styles.textPoint1}>30</Text>
           <Text style={[styles.textPoint2]}>Điểm</Text>
         </View>
+        }
+        
+        {timeCD > 0 &&
+            <View style={styles.viewResult}>
+                
+            </View>
+        }
 
+        {timeCD === 0 && 
         <View style={styles.viewResult}>
-          <View style={styles.viewItem}>
-            <Image style={styles.imgBottle}
-              resizeMode='cover'
-              source={require('../../../images/bottle_type1.png')} />
+        <View style={styles.viewItem}>
+          <Image style={styles.imgBottle}
+            resizeMode='cover'
+            source={require('../../../images/bottle_type1.png')} />
 
-              <View style={styles.viewInfo}>
-                  <Text style={styles.textInfo}>AQUAFINA</Text>
-                  <Text style={styles.textInfo2}>1</Text>
-                  <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
-              </View>
-          </View>
-
-          <View style={styles.viewItem}>
-            <Image style={styles.imgBottle}
-              resizeMode='cover'
-              source={require('../../../images/bottle_type2.png')} />
-
-              <View style={styles.viewInfo}>
-                  <Text style={styles.textInfo}>CHAI KHÁC</Text>
-                  <Text style={styles.textInfo2}>4</Text>
-                  <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
-              </View>
-          </View>
+            <View style={styles.viewInfo}>
+                <Text style={styles.textInfo}>AQUAFINA</Text>
+                <Text style={styles.textInfo2}>1</Text>
+                <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
+            </View>
         </View>
+
+        <View style={styles.viewItem}>
+          <Image style={styles.imgBottle}
+            resizeMode='cover'
+            source={require('../../../images/bottle_type2.png')} />
+
+            <View style={styles.viewInfo}>
+                <Text style={styles.textInfo}>CHAI KHÁC</Text>
+                <Text style={styles.textInfo2}>4</Text>
+                <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
+            </View>
+        </View>
+      </View>}
 
         <Text style={styles.textCountDown}>Tự động kết thúc sau: <Text style={{color:'red',fontWeight:'900'}}>{timeCD} GIÂY NỮA</Text></Text>
 
@@ -106,7 +119,14 @@ const Loading = ({ navigation }) => {
           source={require('../../../images/button_complete_show.png')} />
           </TouchableOpacity>
         }
-      
+      <Modal animationType="slide"
+        transparent={true}
+        visible={false}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+
+      </Modal>
     </View>
   )
 }
