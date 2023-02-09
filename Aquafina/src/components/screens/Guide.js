@@ -11,17 +11,17 @@ const Guide = ({navigation}) => {
       <StatusBar backgroundColor={'#1545A5'} />
       <Image style={styles.imgH}
         resizeMode='cover'
-        source={require('../../../images/logo.png')}
+        source={require('../../../assets/images/logo.png')}
       />
       <Text style={styles.textH}>HƯỚNG DẪN THAM GIA</Text>
       
       <View style={styles.content}>
         <View style={styles.vhContent}>
 
-          <TouchableOpacity style={styles.btnBack}>
+          <TouchableOpacity style={styles.btnBack} onPress={() => console.log("ABC")}>
             <Image style={styles.icBack}
               resizeMode='cover'
-              source={require('../../../images/ic_back.png')}
+              source={require('../../../assets/images/ic_back.png')}
             />
           </TouchableOpacity>
 
@@ -31,7 +31,7 @@ const Guide = ({navigation}) => {
               <Text style={styles.text1}>TRẠM</Text>
               <Image style={styles.imgT}
                 resizeMode='cover'
-                source={require('../../../images/circle_t.png')} />
+                source={require('../../../assets/images/circle_t.png')} />
             </View>
 
             <Text style={styles.text2}>TÁI SINH</Text>
@@ -44,7 +44,7 @@ const Guide = ({navigation}) => {
           <View style={styles.vItem}>
             <Image style={styles.img1}
               resizeMode='cover'
-              source={require('../../../images/ic_1.png')} />
+              source={require('../../../assets/images/ic_1.png')} />
 
             <View style={styles.vItemR}>
               <Text style={styles.textI1}>Bước 1</Text>
@@ -55,7 +55,7 @@ const Guide = ({navigation}) => {
           <View style={styles.vItem}>
             <Image style={styles.img1}
               resizeMode='cover'
-              source={require('../../../images/ic_2.png')} />
+              source={require('../../../assets/images/ic_2.png')} />
 
             <View style={styles.vItemR}>
               <Text style={styles.textI1}>Bước 2</Text>
@@ -67,7 +67,7 @@ const Guide = ({navigation}) => {
           <View style={styles.vItem}>
             <Image style={styles.img1}
               resizeMode='cover'
-              source={require('../../../images/ic_3.png')} />
+              source={require('../../../assets/images/ic_3.png')} />
 
             <View style={styles.vItemR}>
               <Text style={styles.textI1}>Bước 3</Text>
@@ -78,12 +78,12 @@ const Guide = ({navigation}) => {
         </View>
         <Image style={styles.imgC}
           resizeMode='cover'
-          source={require('../../../images/circle_content.png')} />
+          source={require('../../../assets/images/circle_content.png')} />
       </View>
       <TouchableOpacity style={styles.btnS} onPress={() => goToStart()}>
         <Image style={styles.imgBS}
         resizeMode='cover'
-        source={require('../../../images/btn_accept.png')} />
+        source={require('../../../assets/images/btn_accept.png')} />
       </TouchableOpacity>
     </View>
   )
@@ -190,14 +190,15 @@ const styles = StyleSheet.create({
   },
   btnBack: {
     width: '10%',
-    height: '45%',
+    height: '50%',
   },
   vhContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: '15%'
+    height: '15%',
+    zIndex:1
   },
   content: {
     marginHorizontal: 2,

@@ -1,49 +1,33 @@
-import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity,Modal } from 'react-native'
-import React, { useState,useEffect } from 'react'
+import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Modal } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import PopupEndTime from '../popups/PopupEndTime';
+import PopupAccumulatePoints from '../popups/PopupAccumulatePoints';
 
-const Start = ({navigation}) => {
-  const [timeCD, setTimeCD] = useState(30);
-  const [showPopup, setShowPopup] = useState(false);
-  const [goToLoading, setGoToLoading] = useState(false)
+const Start = ({ navigation }) => {
+const [timeCD, setTimeCD] = useState(30);
 
-  const changeShowPopup = (bool) => {
-    setShowPopup(bool)
+
+  const goToLoading = () => {
+    navigation.navigate('Loading');
   }
   
-  const changeGoToLoading = (bool) => {
-    setGoToLoading(bool);
-  }
-  const setTimeCountDown = (number) => {
-        setTimeCD(number);
-  }
-  const showModal = () =>{
-    if(goToLoading){
-      navigation.navigate('Loading');
-    }else{
-      if(timeCD > 0){
-        setTimeCD((timeCD) => timeCD - 1);
-      }else{
-        setShowPopup(true);
-        clearTimeout();
-      }
-    }
-
-    
-  }
   useEffect(() => {
     setTimeout(() => {
-      showModal();
+      if(timeCD == 0){
+          clearTimeout();
+          goToLoading();
+      }
+      setTimeCD((timeCD) => timeCD - 1);
     }, 1000);
   })
-  
+
   return (
     <View style={styles.container}>
-      
+
       <StatusBar backgroundColor={'#1545A5'} />
       <Image style={styles.imgH}
         resizeMode='cover'
-        source={require('../../../images/logo.png')}
+        source={require('../../../assets/images/logo.png')}
       />
       <Text style={styles.textH}>HÃY CHO CHAI RỖNG VÀO MÁY</Text>
 
@@ -60,35 +44,25 @@ const Start = ({navigation}) => {
             <Text style={styles.text3}>CỦA AQUAFINA</Text>
             <Image style={styles.imgT}
               resizeMode='cover'
-              source={require('../../../images/circle_t.png')} />
+              source={require('../../../assets/images/circle_t.png')} />
           </View>
         </View>
-        
+
         <Image style={styles.imgContent}
           resizeMode='cover'
-          source={require('../../../images/ic_1.png')} />
+          source={require('../../../assets/images/ic_1.png')} />
 
         <Text style={styles.textC1}>Lần lượt bỏ từng chai nhựa rỗng vào ô bên trái</Text>
         <Text style={styles.textC2}>Tự động kết thúc sau: <Text style={{ color: 'red' }}>{timeCD} GIÂY NỮA</Text></Text>
         <Image style={styles.imgC}
           resizeMode='cover'
-          source={require('../../../images/circle_content.png')} />
+          source={require('../../../assets/images/circle_content.png')} />
       </View>
-      <TouchableOpacity style={styles.btnS} >
+      <TouchableOpacity style={styles.btnS} onPress={() => goToLoading()}>
         <Image style={styles.imgBS}
           resizeMode='cover'
-          source={require('../../../images/btn_finish.png')} />
+          source={require('../../../assets/images/btn_finish.png')} />
       </TouchableOpacity>
-
-      <Modal transparent={true}
-        animationType='slide'
-        visible={showPopup}
-        onRequestClose ={() => changeShowPopup(false)}
-        style={styles.modalPopup}>
-          <PopupEndTime changeShowPopup={changeShowPopup}
-          setTimeCountDown={setTimeCountDown}
-          changeGoToLoading={changeGoToLoading}/>
-      </Modal>
     </View>
   )
 }
@@ -96,10 +70,10 @@ const Start = ({navigation}) => {
 export default Start
 
 const styles = StyleSheet.create({
-  modalPopup:{
+  modalPopup: {
     width: '100%',
     height: '500%',
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   textC2: {
     width: '80%',
@@ -187,7 +161,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: '15%'
+    height: '15%',
+    zIndex: 1
   },
   content: {
     marginHorizontal: 2,
