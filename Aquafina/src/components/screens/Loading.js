@@ -2,50 +2,35 @@ import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable,M
 import React, { useEffect, useState } from 'react'
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints'
 const Loading = ({ navigation }) => {
-  const [timeCD, setTimeCD] = useState(30);
-  const [textLoading, setTextLoading] = useState('...');
-  const [goToScreen, setGoToScreen] = useState(false);
-  const [visiblePopup, setVisiblePopup] = useState(false);
+  const [timeCD, setTimeCD] = useState(30)
   
-  const setLoadScreen = (bool) => {
-    setGoToScreen(bool);
-  }
   const showButton = () =>{
-    if(goToScreen){
-      navigation.navigate('QRcode')
+    if(timeCD > 0){
+      setTimeCD((timeCD) => timeCD - 1);
     }else{
-      if(timeCD == 0){
-        clearTimeout();
-      }
-      if(timeCD >= 1){
-        setTimeCD((timeCD) => timeCD - 1);
-      }
-        
+      clearTimeout();
     }
-    
   }
   useEffect(() => {
     setTimeout(() => {
       showButton();
     }, 1000);
   })
-
-  
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#1545A5'} />
       <Image style={styles.imgH}
         resizeMode='cover'
-        source={require('../../../assets/images/logo.png')}
+        source={require('../../../images/logo.png')}
       />
-      <Text style={styles.textH}>CHAI NHỰA ĐANG ĐƯỢC XỬ LÝ{textLoading}</Text>
+      <Text style={styles.textH}>CHAI NHỰA ĐANG ĐƯỢC XỬ LÝ...</Text>
 
       <View style={styles.content}>
         <View style={styles.vhContent}>
-          <TouchableOpacity style={styles.btnBack} onPress={() => console.log("ABC")}>
+          <TouchableOpacity style={styles.btnBack}>
             <Image style={styles.icBack}
               resizeMode='cover'
-              source={require('../../../assets/images/ic_back.png')}
+              source={require('../../../images/ic_back.png')}
             />
           </TouchableOpacity>
 
@@ -55,7 +40,7 @@ const Loading = ({ navigation }) => {
               <Text style={styles.text1}>TRẠM</Text>
               <Image style={styles.imgT}
                 resizeMode='cover'
-                source={require('../../../assets/images/circle_t.png')} />
+                source={require('../../../images/circle_t.png')} />
             </View>
 
             <Text style={styles.text2}>TÁI SINH</Text>
@@ -71,10 +56,10 @@ const Loading = ({ navigation }) => {
           <View style={styles.viewBoxPoint}>
           <Image style={styles.imgCircleOut}
             resizeMode='cover'
-            source={require('../../../assets/images/circle_out.png')} />
+            source={require('../../../images/circle_out.png')} />
           <Image style={styles.imgCircleIn}
             resizeMode='cover'
-            source={require('../../../assets/images/circle_in.png')} />
+            source={require('../../../images/circle_in.png')} />
           <Text style={styles.textPoint1}>30</Text>
           <Text style={[styles.textPoint2]}>Điểm</Text>
         </View>
@@ -91,7 +76,7 @@ const Loading = ({ navigation }) => {
         <View style={styles.viewItem}>
           <Image style={styles.imgBottle}
             resizeMode='cover'
-            source={require('../../../assets/images/bottle_type1.png')} />
+            source={require('../../../images/bottle_type1.png')} />
 
             <View style={styles.viewInfo}>
                 <Text style={styles.textInfo}>AQUAFINA</Text>
@@ -103,7 +88,7 @@ const Loading = ({ navigation }) => {
         <View style={styles.viewItem}>
           <Image style={styles.imgBottle}
             resizeMode='cover'
-            source={require('../../../assets/images/bottle_type2.png')} />
+            source={require('../../../images/bottle_type2.png')} />
 
             <View style={styles.viewInfo}>
                 <Text style={styles.textInfo}>CHAI KHÁC</Text>
@@ -117,28 +102,32 @@ const Loading = ({ navigation }) => {
 
         <Image style={styles.imgC}
           resizeMode='cover'
-          source={require('../../../assets/images/circle_content.png')} />
+          source={require('../../../images/circle_content.png')} />
       </View>
       
         {timeCD > 0 && 
         <Pressable style={styles.btnS}>
         <Image style={styles.imgBS}
           resizeMode='cover'
-          source={require('../../../assets/images/button_complete_hide.png')} />
+          source={require('../../../images/button_complete_hide.png')} />
           </Pressable>
         }
         {timeCD === 0 && 
-        <TouchableOpacity style={styles.btnS} onPress={() => setVisiblePopup(true)}>
+        <TouchableOpacity style={styles.btnS}>
         <Image style={styles.imgBS}
           resizeMode='cover'
-          source={require('../../../assets/images/button_complete_show.png')} />
+          source={require('../../../images/button_complete_show.png')} />
           </TouchableOpacity>
         }
-      {visiblePopup && 
-      <PopupAccumulatePoints setLoadScreen={setLoadScreen}/>
-      }
+      <Modal animationType="slide"
+        transparent={true}
+        visible={false}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+
+      </Modal>
     </View>
-    
   )
 }
 
@@ -276,16 +265,14 @@ const styles = StyleSheet.create({
   },
   btnBack: {
     width: '10%',
-    height: '50%',
-    zIndex:3
+    height: '45%',
   },
   vhContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: '15%',
-    zIndex:1
+    height: '15%'
   },
   content: {
     marginHorizontal: 2,
@@ -305,7 +292,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     marginTop: 20,
-    
   },
   imgH: {
     alignSelf: 'center',

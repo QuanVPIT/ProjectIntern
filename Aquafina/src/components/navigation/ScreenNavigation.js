@@ -6,7 +6,6 @@ import Guide from '../screens/Guide';
 import Home from '../screens/Home';
 import Start from '../screens/Start';
 import Loading from '../screens/Loading';
-import QRcode from '../screens/QRcode';
 const Stack = createNativeStackNavigator();
 const ScreenNavigation = () => {
     return (
@@ -18,7 +17,6 @@ const ScreenNavigation = () => {
                 <Stack.Screen name="Guide" component={Guide} />
                 <Stack.Screen name="Start" component={Start} />
                 <Stack.Screen name="Loading" component={Loading} />
-                <Stack.Screen name="QRcode" component={QRcode} />
             </Stack.Navigator>
         </NavigationContainer>
     )
