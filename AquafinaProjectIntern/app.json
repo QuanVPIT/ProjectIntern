@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AquafinaProjectIntern",
-    "slug": "AquafinaProjectIntern",
+    "name": "TestApp",
+    "slug": "TestApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
