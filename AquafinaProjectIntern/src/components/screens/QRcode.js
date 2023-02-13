@@ -11,15 +11,18 @@ const QRcode = ({ navigation }) => {
   const [home, setHome] = useState(false)
   const [title,setTitle] = useState('TRẠM TÁI SINH CỦA AQUAFINA');
 
+  const goHomeFromQR = () =>{
+    setHome(true);
+  }
   const goToHome = () => {
     navigation.navigate('Home');
   }
   
 
   const loadTimeCountDown = () => {
-    // if(home){
-    //   goToHome();
-    // }
+    if(home){
+      goToHome();
+    }
     if (timeCD > 0) {
       setTimeCD((timeCD) => timeCD - 1);
     } else {
@@ -88,7 +91,7 @@ const QRcode = ({ navigation }) => {
         <PopupEndTime setTimeCD={setTimeCD} setvisiblePopupThank={setvisiblePopupThank} setTitle={setTitle}/>
       }
       {visiblePopupThank &&
-        <PopupThank setHome={setHome}/>
+        <PopupThank goHomeFromQR={goHomeFromQR}/>
       }
     </View>
 

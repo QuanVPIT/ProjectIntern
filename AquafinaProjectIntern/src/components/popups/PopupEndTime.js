@@ -1,6 +1,7 @@
-import { Modal, StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, ImageBackgroundComponent } from 'react-native'
+import { Modal, StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, ImageBackgroundComponent, Dimensions } from 'react-native'
 import React, { useState, useEffect } from 'react'
-
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 const PopupEndTime = (props) => {
     const [timeCD, setTimeCD] = useState(10)
 
@@ -10,9 +11,9 @@ const PopupEndTime = (props) => {
 
     }
     const goToHome = () =>{
-        // if(timeCD == 0) {
-        //     props.setvisiblePopupThank(true)
-        // }
+        if(timeCD == 0) {
+            props.setvisiblePopupThank(true)
+        }
         if(timeCD >= 1){
             setTimeCD((timeCD)=> timeCD - 1);
         }
@@ -25,7 +26,7 @@ const PopupEndTime = (props) => {
     })
     return (
         <Modal animationType='slide'
-            transparent={false}>
+            transparent={true}>
             <View style={styles.container}>
                 <Image source={require('../../../assets/images/circle_content.png')}
                     resizeMode='cover'
@@ -41,7 +42,7 @@ const PopupEndTime = (props) => {
                     <Text style={styles.text3}>CỦA AQUAFINA</Text>
                 </View>
 
-                <Text style={[styles.text2, { marginTop: 30, fontSize: 35, letterSpacing: 3 }]}>CẢNH BÁO HẾT THỜI GIAN</Text>
+                <Text style={[styles.text2, { marginTop: 30, fontSize: WIDTH*0.06, letterSpacing: 1 }]}>CẢNH BÁO HẾT THỜI GIAN</Text>
                 <Text style={styles.textWarning}>Thời gian thực hiện quy trình đã kết thúc, bạn có cần thêm thời gian không?</Text>
                 <Text style={styles.textWarning}>Trở về màn hình chính sau: <Text style={{ color: 'red' }}>{timeCD} GIÂY NỮA</Text></Text>
 
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     textButton: {
-        fontSize: 20,
+        fontSize: WIDTH*0.04,
         fontWeight: '700',
         color: '#336CC8',
         textAlign: 'center',
@@ -84,8 +85,8 @@ const styles = StyleSheet.create({
     },
     btnWarning: {
         marginHorizontal: 10,
-        width: 220,
-        height: 70,
+        width: WIDTH*0.4,
+        height: HEIGHT*0.08,
         backgroundColor: '#EDF5F8',
         justifyContent: 'center',
         alignItems: 'center',
@@ -94,6 +95,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 5,
         elevation: 10,
+        marginTop:'20%'
     },
     viewButton: {
         flexDirection: 'row',
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     textWarning: {
-        fontSize: 25,
+        fontSize: WIDTH*0.046,
         fontWeight: '700',
         color: '#707172',
         textAlign: 'center',
@@ -115,13 +117,13 @@ const styles = StyleSheet.create({
         color: '#1545A5',
         fontWeight: '400',
         fontStyle: 'normal',
-        fontSize: 18
+        fontSize: WIDTH*0.035
     },
     text2: {
         color: '#1545A5',
         fontWeight: '900',
         fontStyle: 'normal',
-        fontSize: 28
+        fontSize: WIDTH*0.06
     },
     imgT: {
         width: '20%',
@@ -134,10 +136,11 @@ const styles = StyleSheet.create({
         color: '#1545A5',
         fontWeight: '900',
         fontStyle: 'normal',
-        fontSize: 45
+        fontSize: WIDTH*0.09
     },
     textHC: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop:'-30%'
     },
     circleBG: {
         position: 'absolute',
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         // alignSelf:'center',
         marginTop: '28%',
-        height: '66%',
+        height: '60%',
         marginHorizontal: 10,
         borderRadius: 10,
         // borderWidth:1,
@@ -162,5 +165,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 15,
+        paddingTOp:'5%'
         },
 })

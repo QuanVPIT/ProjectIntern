@@ -3,7 +3,11 @@ import React from 'react'
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
+
 const PopupThank = (props) => {
+    const goHomeFromQRCode = () =>{
+        props.goHomeFromQR(true);
+    }
     return (
         <Modal animationType='slide'
             transparent={true}>
@@ -22,7 +26,7 @@ const PopupThank = (props) => {
                     “<Text style={{ color: '#336CC8' }}>Sải bước phong cách </Text>
                     <Text style={{ color: '#00BB29' }}> Xanh</Text>”
                 </Text>
-                <TouchableOpacity style={styles.btnAccept} onPress={()=> props.setHome(true)}>
+                <TouchableOpacity style={styles.btnAccept} onPress={()=> goHomeFromQRCode()}>
                     <Image style={styles.imgBtn} source={require('../../../assets/images/btn_accept.png')} />
                 </TouchableOpacity>
             </View>
