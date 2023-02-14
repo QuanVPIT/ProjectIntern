@@ -2,6 +2,9 @@ import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Modal, Dime
 import React, { useState, useEffect } from 'react'
 import PopupEndTime from '../popups/PopupEndTime';
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints';
+// import PopupAccumulatePoints from '../popups/PopupAccumulatePoints';
+
+PopupAccumulatePoints
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Start = ({ navigation }) => {

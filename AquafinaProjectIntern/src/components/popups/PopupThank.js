@@ -1,11 +1,12 @@
 import { Modal, StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 
+
 const PopupThank = (props) => {
-    const goHomeFromQRCode = () =>{
+    const goHomeFromQRCode = () => {
         props.goHomeFromQR(true);
     }
     return (
@@ -26,7 +27,7 @@ const PopupThank = (props) => {
                     “<Text style={{ color: '#336CC8' }}>Sải bước phong cách </Text>
                     <Text style={{ color: '#00BB29' }}> Xanh</Text>”
                 </Text>
-                <TouchableOpacity style={styles.btnAccept} onPress={()=> goHomeFromQRCode()}>
+                <TouchableOpacity style={styles.btnAccept} onPress={() => goHomeFromQRCode()}>
                     <Image style={styles.imgBtn} source={require('../../../assets/images/btn_accept.png')} />
                 </TouchableOpacity>
             </View>
@@ -51,13 +52,13 @@ const styles = StyleSheet.create({
     textHighlight: {
         color: '#707172',
         fontWeight: '600',
-        fontSize: WIDTH*0.04,
+        fontSize: WIDTH * 0.04,
         textAlign: 'center',
     },
     textFooter: {
         color: '#707172',
         fontWeight: '400',
-        fontSize: WIDTH*0.04,
+        fontSize: WIDTH * 0.04,
         textAlign: 'center',
         marginTop: '5%',
         marginHorizontal: '20%'
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     textCenter: {
         color: '#1545A5',
         fontWeight: '900',
-        fontSize: WIDTH*0.2,
+        fontSize: WIDTH * 0.2,
         textTransform: 'uppercase',
         textAlign: 'center',
         marginTop: '7%',
@@ -73,15 +74,15 @@ const styles = StyleSheet.create({
     textHeader3: {
         color: '#1545A5',
         fontWeight: '600',
-        fontSize: WIDTH*0.035,
+        fontSize: WIDTH * 0.035,
         textTransform: 'uppercase',
     },
     textHeader2: {
         color: '#1545A5',
         fontWeight: '400',
-        fontSize: WIDTH*0.1,
+        fontSize: WIDTH * 0.1,
         textAlign: 'center',
-        letterSpacing:1.5
+        letterSpacing: 1.5
     },
     imgTextHeader: {
         resizeMode: 'cover',
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     textHeader: {
         color: '#1545A5',
         fontWeight: '900',
-        fontSize: WIDTH*0.1,
+        fontSize: WIDTH * 0.1,
         textAlign: 'center',
 
     },
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
         marginTop: '28%',
         paddingTop: '3%',
         marginHorizontal: '10%',
-        borderRadius:10
-        
+        borderRadius: 10
+
     }
 })
