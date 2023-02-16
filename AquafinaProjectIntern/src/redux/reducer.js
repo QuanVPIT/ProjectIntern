@@ -2,6 +2,9 @@ import { combineReducers } from "redux"
 
 const defaultState = {
     visibleModalThank: false,
+    visibleModalAP: false,
+    visbleModalEndTime: false,
+    goHome: false,
 }
 
 const actionChangeState = (state = defaultState, payload) => {
@@ -10,6 +13,24 @@ const actionChangeState = (state = defaultState, payload) => {
             return {
                 ...state,
                 visibleModalThank: payload.visibleModalThank,
+            }
+        }
+        case "update_two": {
+            return {
+                ...state,
+                visibleModalAP: payload.visibleModalAP,
+            }
+        }
+        case "update_three": {
+            return {
+                ...state,
+                visbleModalEndTime: payload.visbleModalEndTime,
+            }
+        }
+        case "go_home": {
+            return {
+                ...state,
+                goHome: payload.goHome,
             }
         }
         default:

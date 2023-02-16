@@ -1,7 +1,9 @@
-import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable,Modal,ActivityIndicator, Dimensions } from 'react-native'
+import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable, Modal, ActivityIndicator, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints'
 import PopupThank from '../popups/PopupThank';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateVisibleOne, updateVisibleTwo } from '../../redux/action';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Loading = ({ navigation }) => {
@@ -11,25 +13,36 @@ const Loading = ({ navigation }) => {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const [showPopupThank, setShowPopupThank] = useState(false)
   const [home, setHome] = useState(false)
+
+  const myState = useSelector((state) => state.resultSate)
+  const dispatch = useDispatch();
   const setLoadScreen = (bool) => {
     setGoToScreen(bool);
   }
-  const showButton = () =>{
-    if(goToScreen){
+  const goHomeFromQR = (bool) => {
+    setHome(bool)
+  }
+
+  const showButton = () => {
+    if (goToScreen) {
       navigation.navigate('QRcode')
     }
-    if(home){
+    if (home) {
       navigation.navigate('Home')
-    }else{
-      if(timeCD == 0){
-        clearTimeout();
-      }
-      if(timeCD >= 1){
+    } else {
+      if (timeCD >= 1) {
         setTimeCD((timeCD) => timeCD - 1);
+        // if (textLoading === '...') {
+        //   setTextLoading('');
+        // } else {
+        //   setTextLoading(textLoading + '.');
+        // }
       }
-        
+      if (timeCD == 0) {
+        clearTimeout()
+      }
     }
-    
+
   }
   useEffect(() => {
     setTimeout(() => {
@@ -37,7 +50,7 @@ const Loading = ({ navigation }) => {
     }, 1000);
   })
 
-  
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#1545A5'} />
@@ -70,84 +83,83 @@ const Loading = ({ navigation }) => {
             <Text style={styles.text3}>CỦA AQUAFINA</Text>
           </View>
         </View>
-        {timeCD > 0 && 
-            <View style={styles.viewBoxPoint}> 
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
+        {timeCD > 0 &&
+          <View style={styles.viewBoxPoint}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
         }
         {timeCD === 0 &&
           <View style={styles.viewBoxPoint}>
-          <Image style={styles.imgCircleOut}
-            resizeMode='cover'
-            source={require('../../../assets/images/circle_out.png')} />
-          <Image style={styles.imgCircleIn}
-            resizeMode='cover'
-            source={require('../../../assets/images/circle_in.png')} />
-          <Text style={styles.textPoint1}>30</Text>
-          <Text style={[styles.textPoint2]}>Điểm</Text>
-        </View>
+            <Image style={styles.imgCircleOut}
+              resizeMode='cover'
+              source={require('../../../assets/images/circle_out.png')} />
+            <Image style={styles.imgCircleIn}
+              resizeMode='cover'
+              source={require('../../../assets/images/circle_in.png')} />
+            <Text style={styles.textPoint1}>30</Text>
+            <Text style={[styles.textPoint2]}>Điểm</Text>
+          </View>
         }
-        
+
         {timeCD > 0 &&
-            <View style={styles.viewResult}>
-                
-            </View>
+          <View style={styles.viewResult}>
+
+          </View>
         }
 
-        {timeCD === 0 && 
-        <View style={styles.viewResult}>
-        <View style={styles.viewItem}>
-          <Image style={styles.imgBottle}
-            resizeMode='cover'
-            source={require('../../../assets/images/bottle_type1.png')} />
+        {timeCD === 0 &&
+          <View style={styles.viewResult}>
+            <View style={styles.viewItem}>
+              <Image style={styles.imgBottle}
+                resizeMode='cover'
+                source={require('../../../assets/images/bottle_type1.png')} />
 
-            <View style={styles.viewInfo}>
+              <View style={styles.viewInfo}>
                 <Text style={styles.textInfo}>AQUAFINA</Text>
                 <Text style={styles.textInfo2}>1</Text>
-                <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
+                <Text style={[styles.textInfo, { fontWeight: '500' }]}>chai</Text>
+              </View>
             </View>
-        </View>
 
-        <View style={styles.viewItem}>
-          <Image style={styles.imgBottle}
-            resizeMode='cover'
-            source={require('../../../assets/images/bottle_type2.png')} />
+            <View style={styles.viewItem}>
+              <Image style={styles.imgBottle}
+                resizeMode='cover'
+                source={require('../../../assets/images/bottle_type2.png')} />
 
-            <View style={styles.viewInfo}>
+              <View style={styles.viewInfo}>
                 <Text style={styles.textInfo}>CHAI KHÁC</Text>
                 <Text style={styles.textInfo2}>4</Text>
-                <Text style={[styles.textInfo,{fontWeight:'500'}]}>chai</Text>
+                <Text style={[styles.textInfo, { fontWeight: '500' }]}>chai</Text>
+              </View>
             </View>
-        </View>
-      </View>}
+          </View>}
 
-        <Text style={styles.textCountDown}>Tự động kết thúc sau: <Text style={{color:'red',fontWeight:'900'}}>{timeCD} GIÂY NỮA</Text></Text>
+        <Text style={styles.textCountDown}>Tự động kết thúc sau: <Text style={{ color: 'red', fontWeight: '900' }}>{timeCD} GIÂY NỮA</Text></Text>
 
         <Image style={styles.imgC}
           resizeMode='cover'
           source={require('../../../assets/images/circle_content.png')} />
       </View>
-      
-        {timeCD > 0 && 
+
+      {timeCD > 0 &&
         <Pressable style={styles.btnS}>
-        <Image style={styles.imgBS}
-          resizeMode='cover'
-          source={require('../../../assets/images/button_complete_hide.png')} />
-          </Pressable>
-        }
-        {timeCD === 0 && 
-        <TouchableOpacity style={styles.btnS} onPress={() => setVisiblePopup(true)}>
-        <Image style={styles.imgBS}
-          resizeMode='cover'
-          source={require('../../../assets/images/button_complete_show.png')} />
-          </TouchableOpacity>
-        }
-      {visiblePopup && 
-      <PopupAccumulatePoints setLoadScreen={setLoadScreen} setShowPopupThank={setShowPopupThank}/>
+          <Image style={styles.imgBS}
+            resizeMode='cover'
+            source={require('../../../assets/images/button_complete_hide.png')} />
+        </Pressable>
       }
-      {/* {showPopupThank && <PopupThank setHome={setHome} /> } */}
+      {timeCD === 0 &&
+        <TouchableOpacity style={styles.btnS} onPress={() => dispatch(updateVisibleTwo(true))}>
+          <Image style={styles.imgBS}
+            resizeMode='cover'
+            source={require('../../../assets/images/button_complete_show.png')} />
+        </TouchableOpacity>
+      }
+      {myState.visibleModalThank && <PopupThank goHomeFromQR={goHomeFromQR} />}
+      {myState.visibleModalAP && <PopupAccumulatePoints setLoadScreen={setLoadScreen} />}
+
     </View>
-    
+
   )
 }
 
@@ -171,48 +183,48 @@ const styles = StyleSheet.create({
     position: 'absolute',
 
   },
-  textCountDown:{
+  textCountDown: {
     fontWeight: '500',
-    fontSize: WIDTH*0.04,
+    fontSize: WIDTH * 0.04,
     textAlign: 'center',
-    marginTop:'10%',
+    marginTop: '10%',
     color: '#707172'
   },
-  textInfo2:{
-    color:'#FA4238',
-    fontWeight:'900',
-    fontSize:WIDTH*0.06
+  textInfo2: {
+    color: '#FA4238',
+    fontWeight: '900',
+    fontSize: WIDTH * 0.06
   },
-  textInfo:{
-    color:'#336CC8',
-    fontWeight:'700',
-    fontSize:WIDTH*0.035
+  textInfo: {
+    color: '#336CC8',
+    fontWeight: '700',
+    fontSize: WIDTH * 0.035
   },
-  viewInfo:{
+  viewInfo: {
     width: '60%',
     height: '90%',
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  imgBottle:{
+  imgBottle: {
     width: '40%',
     height: '98%',
-    borderRadius:10
+    borderRadius: 10
   },
   viewItem: {
     flexDirection: 'row',
     width: '45%',
     height: '100%',
     padding: 5,
-    borderRadius:10,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: 'gray',
-    margin:'3%'
+    margin: '3%'
   },
   viewResult: {
     flexDirection: 'row',
     width: '100%',
-    height: HEIGHT*0.09,
+    height: HEIGHT * 0.09,
     marginTop: '8%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -233,13 +245,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#6691D6',
     fontWeight: '400',
-    fontSize: WIDTH*0.06,
+    fontSize: WIDTH * 0.06,
     marginTop: '-5%',
   },
   textPoint1: {
     color: '#1545A5',
     fontWeight: '800',
-    fontSize: WIDTH*0.1,
+    fontSize: WIDTH * 0.1,
     textAlign: 'center',
   },
   viewBoxPoint: {
@@ -264,11 +276,11 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   imgT: {
-    width: WIDTH*0.07,
-    height: HEIGHT*0.09,
+    width: WIDTH * 0.07,
+    height: HEIGHT * 0.09,
     position: 'absolute',
-    top: -HEIGHT*0.02,
-    left: WIDTH*0.03
+    top: -HEIGHT * 0.02,
+    left: WIDTH * 0.03
   },
   text1: {
     color: '#1545A5',
@@ -281,7 +293,7 @@ const styles = StyleSheet.create({
   },
   textCL: {
     width: '100%',
-    fontSize: WIDTH*0.05,
+    fontSize: WIDTH * 0.05,
     color: '#0047BA',
     fontWeight: '700',
     textDecorationLine: 'underline',
@@ -296,7 +308,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   content: {
-    flex:0.75,
+    flex: 0.75,
     marginHorizontal: 2,
     width: '95%',
     height: '65%',
@@ -328,9 +340,11 @@ const styles = StyleSheet.create({
     color: '#0047BA',
     fontWeight: '700',
     fontStyle: 'normal',
-    fontSize: WIDTH*0.06,
-    textAlign: 'center',
+    fontSize: WIDTH * 0.06,
+    textAlign: 'left',
     marginTop: 20,
+    // alignSelf:'center',
+    marginLeft: '6%',
   },
   imgH: {
     alignSelf: 'center',
@@ -339,7 +353,7 @@ const styles = StyleSheet.create({
     marginTop: HEIGHT * 0.01,
     resizeMode: 'stretch',
   },
-  viewBox1:{
+  viewBox1: {
     flex: 0.3,
   },
   container: {

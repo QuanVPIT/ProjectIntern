@@ -7,10 +7,12 @@ import Home from '../screens/Home';
 import Start from '../screens/Start';
 import Loading from '../screens/Loading';
 import QRcode from '../screens/QRcode';
-
+import { Provider } from 'react-redux';
+import store from '../../redux/store'
 const Stack = createNativeStackNavigator();
 const ScreenNavigation = () => {
     return (
+        <Provider store={store}>
             <NavigationContainer >
                 <Stack.Navigator screenOptions={{
                     headerShown: false,
@@ -22,6 +24,8 @@ const ScreenNavigation = () => {
                     <Stack.Screen name="QRcode" component={QRcode} />
                 </Stack.Navigator>
             </NavigationContainer>
+        </Provider>
+            
 
     )
 }

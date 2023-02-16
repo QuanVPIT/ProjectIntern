@@ -1,13 +1,20 @@
 import { Modal, StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { goHome, updateVisibleOne } from '../../redux/action';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-
-
-
 const PopupThank = (props) => {
+    const myState = useSelector((state) => state.resultSate)
+    const dispatch = useDispatch();
+    const handleAccept = () => {
+        dispatch(updateVisibleOne(false));
+        dispatch(goHome(true));
+        
+    }
     const goHomeFromQRCode = () => {
         props.goHomeFromQR(true);
+        dispatch(updateVisibleOne(false))
     }
     return (
         <Modal animationType='slide'
@@ -27,7 +34,7 @@ const PopupThank = (props) => {
                     “<Text style={{ color: '#336CC8' }}>Sải bước phong cách </Text>
                     <Text style={{ color: '#00BB29' }}> Xanh</Text>”
                 </Text>
-                <TouchableOpacity style={styles.btnAccept} onPress={() => goHomeFromQRCode()}>
+                <TouchableOpacity style={styles.btnAccept} onPress={() => handleAccept()}>
                     <Image style={styles.imgBtn} source={require('../../../assets/images/btn_accept.png')} />
                 </TouchableOpacity>
             </View>

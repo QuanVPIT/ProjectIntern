@@ -1,6 +1,7 @@
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View, Linking, Dimensions } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { updateVisibleOne } from '../../redux/action';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -13,12 +14,10 @@ const Home = ({ navigation }) => {
     navigation.navigate('Guide');
   }
 
-  // const info = useSelector((state) => state.resultSate)
-  // const dispatch = useDispatch();
+  const myState = useSelector((state) => state.resultSate)
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log("Kết quả",info);
-  // })
+  
   
   const handleLink = async (url) => {
     const supported = await Linking.canOpenURL(url);

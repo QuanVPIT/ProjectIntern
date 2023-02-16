@@ -2,6 +2,9 @@ import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Pressable, 
 import React, { useEffect, useState } from 'react'
 import PopupThank from '../popups/PopupThank';
 import PopupEndTime from '../popups/PopupEndTime';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateVisibleOne, updateVisibleThree, updateVisibleTwo } from '../../redux/action';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const QRcode = ({ navigation }) => {
@@ -10,7 +13,8 @@ const QRcode = ({ navigation }) => {
   const [visiblePopupThank, setvisiblePopupThank] = useState(false)
   const [home, setHome] = useState(false)
   const [title,setTitle] = useState('TRẠM TÁI SINH CỦA AQUAFINA');
-
+  const myState = useSelector((state) => state.resultSate)
+  const dispatch = useDispatch();
   const goHomeFromQR = () =>{
     setHome(true);
   }
@@ -20,13 +24,11 @@ const QRcode = ({ navigation }) => {
   
 
   const loadTimeCountDown = () => {
-    if(home){
+    if(home || myState.goHome){
       goToHome();
     }
-    if (timeCD > 0) {
+    if (timeCD >= 1) {
       setTimeCD((timeCD) => timeCD - 1);
-    } else {
-      clearTimeout();
     }
   }
   useEffect(() => {
@@ -82,17 +84,18 @@ const QRcode = ({ navigation }) => {
           resizeMode='cover'
           source={require('../../../assets/images/circle_content.png')} />
       </View>
-      <TouchableOpacity style={styles.btnS} onPress={()=> setvisiblePopupThank(true)}>
+      <TouchableOpacity style={styles.btnS} onPress={()=> dispatch(updateVisibleOne(true))}>
         <Image style={styles.imgBS}
           resizeMode='cover'
           source={require('../../../assets/images/btn_accept.png')} />
       </TouchableOpacity>
+      {myState.visibleModalThank &&
+      <PopupThank/>
+      }
       {timeCD == 0 &&
-        <PopupEndTime setTimeCD={setTimeCD} setvisiblePopupThank={setvisiblePopupThank} setTitle={setTitle}/>
+      <PopupEndTime setTitle={setTitle} setTimeCD={setTimeCD}/>
       }
-      {visiblePopupThank &&
-        <PopupThank goHomeFromQR={goHomeFromQR}/>
-      }
+        
     </View>
 
   )
