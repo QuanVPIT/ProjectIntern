@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints'
 import PopupThank from '../popups/PopupThank';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateVisibleOne, updateVisibleTwo } from '../../redux/action';
+import { goHome, updateVisibleOne, updateVisibleTwo } from '../../redux/action';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Loading = ({ navigation }) => {
@@ -27,7 +27,8 @@ const Loading = ({ navigation }) => {
     if (goToScreen) {
       navigation.navigate('QRcode')
     }
-    if (home) {
+    if (home || myState.goHome) {
+      dispatch(goHome(false));
       navigation.navigate('Home')
     } else {
       if (timeCD >= 1) {

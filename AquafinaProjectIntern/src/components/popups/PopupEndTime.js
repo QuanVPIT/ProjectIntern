@@ -15,14 +15,16 @@ const PopupEndTime = (props) => {
         props.setTimeCD(30);
         dispatch(updateVisibleThree(false))
     }
-    
+    const homeScreen = () => {
+        dispatch(updateVisibleThree(false));
+            dispatch(updateVisibleOne(true)); 
+    }
     const goToHome = () => {
         if (timeCD >= 1) {
             setTimeCD((timeCD) => timeCD - 1);
         }
         if(timeCD == 0){
-            dispatch(updateVisibleThree(false));
-            dispatch(updateVisibleOne(true)); //);
+            homeScreen();
         }
     }
     useEffect(() => {
@@ -54,7 +56,7 @@ const PopupEndTime = (props) => {
                 <Text style={styles.textWarning}>Trở về màn hình chính sau: <Text style={{ color: 'red' }}>{timeCD} GIÂY NỮA</Text></Text>
 
                 <View style={styles.viewButton}>
-                    <TouchableOpacity style={styles.btnWarning}>
+                    <TouchableOpacity style={styles.btnWarning} onPress={()=>homeScreen()}>
                         <Text style={styles.textButton}>MÀN HÌNH CHÍNH</Text>
                         <Image style={styles.imgBtnW}
                             source={require('../../../assets/images//buttonW1.png')}
