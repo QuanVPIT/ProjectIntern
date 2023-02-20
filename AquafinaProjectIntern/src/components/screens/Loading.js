@@ -11,8 +11,11 @@ const Loading = ({ navigation }) => {
   const [textLoading, setTextLoading] = useState('...');
   const [goToScreen, setGoToScreen] = useState(false);
   const [visiblePopup, setVisiblePopup] = useState(false);
-  const [showPopupThank, setShowPopupThank] = useState(false)
-  const [home, setHome] = useState(false)
+  const [showPopupThank, setShowPopupThank] = useState(false);
+  const [home, setHome] = useState(false);
+  const [inIDLoading, setInIDLoading] = useState(null);
+  const [inIDCount, setInIDCount] = useState(null);
+  const [dotCount, setDotCount] = useState(0);
 
   const myState = useSelector((state) => state.resultSate)
   const dispatch = useDispatch();
@@ -23,33 +26,34 @@ const Loading = ({ navigation }) => {
     setHome(bool)
   }
 
-  const showButton = () => {
-    if (goToScreen) {
-      navigation.navigate('QRcode')
-    }
-    if (home || myState.goHome) {
-      dispatch(goHome(false));
-      navigation.navigate('Home')
-    } else {
-      if (timeCD >= 1) {
-        setTimeCD((timeCD) => timeCD - 1);
-        // if (textLoading === '...') {
-        //   setTextLoading('');
-        // } else {
-        //   setTextLoading(textLoading + '.');
-        // }
-      }
-      if (timeCD == 0) {
-        clearTimeout()
-      }
-    }
-
-  }
   useEffect(() => {
-    setTimeout(() => {
-      showButton();
+    const id = setInterval(() => {
+      setTimeCD(timeCD => timeCD - 1);
     }, 1000);
-  })
+    setInIDCount(id);
+    return() => clearInterval(inIDCount);
+  }, [])
+
+  useEffect(() => {
+    if(goToScreen) {
+      navigation.navigate('QRcode');
+    }
+    if(myState.goHome){
+      dispatch(goHome(false))
+      navigation.navigate('Home');
+    }
+  },[goToScreen,myState.goHome])
+  
+
+  useEffect(() => {
+    if(timeCD === 0){
+      clearInterval(inIDCount);
+      clearInterval(inIDLoading);
+    }
+  }, [timeCD])
+  
+  
+  
 
 
   return (

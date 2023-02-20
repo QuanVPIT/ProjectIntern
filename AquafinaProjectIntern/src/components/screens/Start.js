@@ -2,31 +2,37 @@ import { Image, StyleSheet, StatusBar, View, Text, TouchableOpacity, Modal, Dime
 import React, { useState, useEffect } from 'react'
 import PopupEndTime from '../popups/PopupEndTime';
 import PopupAccumulatePoints from '../popups/PopupAccumulatePoints';
+import { goHome } from '../../redux/action';
 // import PopupAccumulatePoints from '../popups/PopupAccumulatePoints';
 
 PopupAccumulatePoints
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Start = ({ navigation }) => {
-const [timeCD, setTimeCD] = useState(30);
+  const [timeCD, setTimeCD] = useState(30);
+  const [intervalID, setIntervalID] = useState(null);
 
 
   const goToLoading = () => {
     navigation.navigate('Loading');
   }
-  
+
   useEffect(() => {
-    setTimeout(() => {
-      if(timeCD == 0){
-          clearTimeout();
-          goToLoading();
-      }
-      if(timeCD >=1 ){
-        setTimeCD((timeCD) => timeCD - 1);
-      }
-      
+    const id = setInterval(() => {
+        setTimeCD(timeCD => timeCD - 1);
     }, 1000);
-  })
+    setIntervalID(id);
+    return () => clearInterval(intervalID);
+  }, [])
+
+  useEffect(() => {
+    if(timeCD === 0){
+      clearInterval(intervalID);
+      goToLoading();
+    }
+  }, [timeCD])
+  
+
 
   return (
     <View style={styles.container}>
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     textAlign: 'center',
-    fontSize: WIDTH*0.04,
+    fontSize: WIDTH * 0.04,
     marginTop: '5%',
     fontWeight: '500',
     color: '#707172'
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     textAlign: 'center',
-    fontSize: WIDTH*0.05,
+    fontSize: WIDTH * 0.05,
     marginTop: 10,
     fontWeight: '500',
     color: '#707172'
@@ -144,11 +150,11 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   imgT: {
-    width: WIDTH*0.07,
-    height: HEIGHT*0.09,
+    width: WIDTH * 0.07,
+    height: HEIGHT * 0.09,
     position: 'absolute',
-    top: -HEIGHT*0.02,
-    left: WIDTH*0.03
+    top: -HEIGHT * 0.02,
+    left: WIDTH * 0.03
   },
   text1: {
     color: '#1545A5',
@@ -161,7 +167,7 @@ const styles = StyleSheet.create({
   },
   textCL: {
     width: '100%',
-    fontSize: WIDTH*0.05,
+    fontSize: WIDTH * 0.05,
     color: '#0047BA',
     fontWeight: '700',
     textDecorationLine: 'underline',
@@ -176,7 +182,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   content: {
-    flex:0.75,
+    flex: 0.75,
     marginHorizontal: 2,
     width: '95%',
     height: '65%',
@@ -191,7 +197,7 @@ const styles = StyleSheet.create({
     color: '#0047BA',
     fontWeight: '700',
     fontStyle: 'normal',
-    fontSize: WIDTH*0.06,
+    fontSize: WIDTH * 0.06,
     textAlign: 'center',
     marginTop: 20,
   },
