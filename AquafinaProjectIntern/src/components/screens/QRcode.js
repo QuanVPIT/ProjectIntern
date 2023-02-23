@@ -92,7 +92,7 @@ const QRcode = ({ navigation }) => {
       {myState.visibleModalThank &&
       <PopupThank/>
       }
-      {timeCD == 0 &&
+      {timeCD === 0 &&
       <PopupEndTime setTitle={setTitle} setTimeCD={setTimeCD}/>
       }
         
